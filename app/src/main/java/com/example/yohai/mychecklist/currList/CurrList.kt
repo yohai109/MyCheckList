@@ -26,6 +26,8 @@ class CurrList : Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(CurrListViewModel::class.java)
         // TODO: Use the ViewModel
+
+        viewModel.getList("a")
     }
 
 }
