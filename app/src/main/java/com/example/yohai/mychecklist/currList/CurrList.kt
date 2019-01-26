@@ -1,12 +1,11 @@
 package com.example.yohai.mychecklist.currList
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
 import com.example.yohai.mychecklist.R
 
 class CurrList : Fragment() {

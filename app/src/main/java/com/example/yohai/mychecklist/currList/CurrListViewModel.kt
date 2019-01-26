@@ -1,11 +1,16 @@
 package com.example.yohai.mychecklist.currList
 
+import android.arch.persistence.room.Room
+import android.content.Context
 import androidx.lifecycle.ViewModel
-import com.example.yohai.mychecklist.ListRepo
+import com.example.yohai.mychecklist.database.AppDatabase
 
-class CurrListViewModel : ViewModel() {
+class CurrListViewModel(content: Context) : ViewModel() {
     // TODO: Implement the ViewModel
-    private val listRepo = ListRepo()
+    private val DB = Room.databaseBuilder(
+            content,
+            AppDatabase::class.java, "database-name"
+    ).build()
 
-    fun getList(name: String)= listRepo.getList(name)
+    fun getList(name: String)= emptyList<String>()
 }
