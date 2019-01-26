@@ -1,9 +1,10 @@
 package com.example.yohai.mychecklist.database.entities
 
-import android.arch.persistence.room.ColumnInfo
-import android.arch.persistence.room.Embedded
-import android.arch.persistence.room.Entity
-import android.arch.persistence.room.PrimaryKey
+import androidx.room.ColumnInfo
+import androidx.room.Embedded
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
 
 @Entity(tableName = "lists")
 data class ListEntity(

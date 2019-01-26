@@ -1,7 +1,7 @@
 package com.example.yohai.mychecklist.database.daos
 
-import android.arch.persistence.room.Insert
-import android.arch.persistence.room.Query
+import androidx.room.Insert
+import androidx.room.Query
 import androidx.lifecycle.LiveData
 import com.example.yohai.mychecklist.database.entities.CategoryEntity
 

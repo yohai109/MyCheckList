@@ -5,10 +5,10 @@ import androidx.lifecycle.ViewModel
 import com.example.yohai.mychecklist.database.Repository
 import com.example.yohai.mychecklist.database.entities.CategoryEntity
 
-class CurrListViewModel(application: Application) : ViewModel() {
+class CurrListVieModel(application: Application) : ViewModel() {
     // TODO: Implement the ViewModel
     private val repo = Repository(application)
-    internal val allCategories = repo.getCategories()
+    internal val allCaegories = repo.getCategories()
 
-    fun insert(category: CategoryEntity) = repo.insertCategory(category)
+    fun insert(category: CategoryEntity) = repo.Insert(category)
 }
