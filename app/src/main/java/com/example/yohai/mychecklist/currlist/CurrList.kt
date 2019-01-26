@@ -1,7 +1,6 @@
 package com.example.yohai.mychecklist.currlist
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.yohai.mychecklist.R
 import com.example.yohai.mychecklist.database.entities.CategoryEntity
+import timber.log.Timber
 
 class CurrList : Fragment() {
 
@@ -32,7 +32,7 @@ class CurrList : Fragment() {
 
         viewModel.allCategories.observe(this, Observer<List<CategoryEntity>> {
             // TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-            Log.d("categories","Categories has changed")
+            Timber.d("Categories has changed")
             Toast.makeText(activity,"Categories has changed",Toast.LENGTH_SHORT).show()
         })
     }

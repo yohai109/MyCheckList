@@ -35,6 +35,13 @@ dependencies {
     annotationProcessor 'android.arch.persistence.room:compiler::1.1.1'
     implementation 'androidx.room:room-rxjava2:2.1.0-alpha04'
 
+    // timber
+    implementation 'com.jakewharton.timber:timber:4.7.1'
+
+    // butter knife
+    implementation 'com.jakewharton:butterknife:8.8.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+
     // test libraries
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.1'
