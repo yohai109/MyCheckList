@@ -10,6 +10,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.yohai.mychecklist.R
 import com.example.yohai.mychecklist.database.entities.CategoryEntity
+import com.example.yohai.mychecklist.database.entities.ItemEntity
+import com.example.yohai.mychecklist.database.entities.ListEntity
+import kotlinx.android.synthetic.main.curr_list_fragment.*
 import timber.log.Timber
 
 class CurrList : Fragment() {
@@ -28,13 +31,20 @@ class CurrList : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(CurrListViewModel::class.java)
-        // TODO: Use the ViewModel
+
+        fab.setOnClickListener {
+            viewModel.insert(CategoryEntity("hello", listOf(ListEntity("world", listOf(ItemEntity("item 1"))))))
+            Timber.d("Inserting new category")
+        }
 
         viewModel.allCategories.observe(this, Observer<List<CategoryEntity>> {
-            // TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
             Timber.d("Categories has changed")
-            Toast.makeText(activity,"Categories has changed",Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity,"curr db: $it",Toast.LENGTH_SHORT).show()
+            Timber.d("curr DB $it")
         })
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+    }
 }
