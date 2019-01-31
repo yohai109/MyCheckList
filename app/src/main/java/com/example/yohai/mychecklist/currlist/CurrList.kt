@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.example.yohai.mychecklist.MainActivity
 import com.example.yohai.mychecklist.R
 import com.example.yohai.mychecklist.database.entities.CategoryEntity
 import com.example.yohai.mychecklist.database.entities.ItemEntity
@@ -21,7 +22,6 @@ class CurrList : Fragment() {
         fun newInstance() = CurrList()
     }
 
-    private lateinit var viewModel: CurrListViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -30,17 +30,11 @@ class CurrList : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(CurrListViewModel::class.java)
 
-        fab.setOnClickListener {
-            viewModel.insert(CategoryEntity("hello", listOf(ListEntity("world", listOf(ItemEntity("item 1"))))))
-            Timber.d("Inserting new category")
-        }
-
-        viewModel.allCategories.observe(this, Observer<List<CategoryEntity>> {
+        (activity as MainActivity).viewModel.allCategories.observe(this, Observer<List<CategoryEntity>> {
+            // TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
             Timber.d("Categories has changed")
-            Toast.makeText(activity,"curr db: $it",Toast.LENGTH_SHORT).show()
-            Timber.d("curr DB $it")
+            Toast.makeText(activity,"Categories has changed",Toast.LENGTH_SHORT).show()
         })
     }
 
