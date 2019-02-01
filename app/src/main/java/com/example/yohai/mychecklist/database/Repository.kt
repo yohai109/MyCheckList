@@ -5,17 +5,11 @@ import android.os.AsyncTask
 import androidx.lifecycle.LiveData
 import com.example.yohai.mychecklist.database.daos.CategoryDao
 import com.example.yohai.mychecklist.database.entities.CategoryEntity
+import javax.inject.Inject
 
-class Repository(application: Application) {
+class Repository @Inject constructor(private val categoriesDao: CategoryDao) {
 
-    private val categoriesDao: CategoryDao
-    private val listLiveData: LiveData<List<CategoryEntity>>
-
-    init {
-        val db = AppDatabase.getInstance(application)
-        categoriesDao = db?.CategotyDao()!!
-        listLiveData = categoriesDao.getAll()
-    }
+    private val listLiveData: LiveData<List<CategoryEntity>> = categoriesDao.getAll()
 
     fun getCategories() = listLiveData
 
