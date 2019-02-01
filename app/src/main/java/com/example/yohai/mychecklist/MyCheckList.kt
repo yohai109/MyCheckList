@@ -2,9 +2,8 @@ package com.example.yohai.mychecklist
 
 import android.app.Activity
 import android.app.Application
-import com.example.yohai.mychecklist.dagger.modules.AppModule
 import com.example.yohai.mychecklist.dagger.component.DaggerAppComponent
-import com.example.yohai.mychecklist.dagger.modules.BuildersModule
+import com.example.yohai.mychecklist.dagger.modules.AppModule
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
 import dagger.android.AndroidInjector

@@ -15,5 +15,8 @@ interface CategoryDao {
     fun getAll(): LiveData<List<CategoryEntity>>
 
     @Insert
-    fun save(newCategories: List<CategoryEntity>)
+    fun addCategory(newCategories: List<CategoryEntity>)
+
+    @Insert
+    fun addList(newList: List<ListEntity>)
 }
