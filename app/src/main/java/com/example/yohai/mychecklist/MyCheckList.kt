@@ -13,14 +13,17 @@ class MyCheckList: Application() {
         Logger.addLogAdapter(AndroidLogAdapter())
 
         if (BuildConfig.DEBUG) {
-            Timber.plant(Timber.DebugTree())
+//            Timber.plant(Timber.DebugTree())
+            Timber.plant(MyLogTree())
         } else {
 //            Timber.plant(Timber.DebugTree())
-            Timber.plant(object : Timber.DebugTree() {
-                override fun log(priority: Int, tag: String?, message: String, t: Throwable?) {
-                    Logger.log(priority, tag, message, t)
-                }
-            })
+            Timber.plant(MyLogTree())
+        }
+    }
+
+    inner class MyLogTree: Timber.DebugTree() {
+        override fun log(priority: Int, tag: String?, message: String, t: Throwable?) {
+            Logger.log(priority, tag, message, t)
         }
     }
 }

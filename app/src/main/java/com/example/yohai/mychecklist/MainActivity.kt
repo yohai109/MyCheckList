@@ -4,7 +4,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
-import com.example.yohai.mychecklist.currlist.CurrList
+import com.example.yohai.mychecklist.currlist.ui.CurrList
+import com.example.yohai.mychecklist.currlist.viewmodel.CurrListViewModel
 import timber.log.Timber
 
 class MainActivity : AppCompatActivity() {
@@ -15,10 +16,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         viewModel = ViewModelProviders.of(this).get(CurrListViewModel::class.java)
-        viewModel.initRepo(application)
+//        viewModel.initRepo(application)
 
         Timber.d("Adding first Fragment")
-        addFragment("firstFragment",R.id.fragment_holder){CurrList.newInstance()}
+        addFragment("firstFragment",R.id.fragment_holder){ CurrList.newInstance()}
     }
 }
 
