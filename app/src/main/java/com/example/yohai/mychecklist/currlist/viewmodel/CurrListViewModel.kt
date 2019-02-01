@@ -6,16 +6,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.example.yohai.mychecklist.database.Repository
 import com.example.yohai.mychecklist.database.entities.CategoryEntity
+import javax.inject.Inject
 
-class CurrListViewModel(repo: Repository) : ViewModel() {
+class CurrListViewModel@Inject constructor(private val repo: Repository) : ViewModel() {
     // TODO: Implement the ViewModel
-    private var repo: Repository? = null
-    var allCategories: LiveData<List<CategoryEntity>>? = null
+    var allCategories: LiveData<List<CategoryEntity>>?  = repo.getCategories()
 
-    fun initRepo(application: Application){
-        repo = Repository(application)
-        allCategories = repo?.getCategories()
-    }
-
-    fun insert(category: CategoryEntity) = repo?.insertCategory(category)
+    fun insert(category: CategoryEntity) = repo.insertCategory(category)
 }

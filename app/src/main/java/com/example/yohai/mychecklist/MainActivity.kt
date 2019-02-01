@@ -6,21 +6,22 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.example.yohai.mychecklist.currlist.ui.CurrList
 import com.example.yohai.mychecklist.currlist.viewmodel.CurrListViewModel
+import com.example.yohai.mychecklist.currlist.viewmodel.ViewModelFactory
 import dagger.android.AndroidInjection
 import timber.log.Timber
+import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
 
+    @Inject lateinit var factory: ViewModelFactory
     lateinit var viewModel: CurrListViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         AndroidInjection.inject(this)
 
-        viewModel = ViewModelProviders.of(this).get(CurrListViewModel::class.java)
-//        viewModel.initRepo(application)
+        viewModel = ViewModelProviders.of(this, factory).get(CurrListViewModel::class.java)
 
         Timber.d("Adding first Fragment")
         addFragment("firstFragment",R.id.fragment_holder){ CurrList.newInstance()}
