@@ -52,27 +52,26 @@ class CurrList : Fragment() {
     private fun fabClick(v: View?) {
         Timber.d("Clicked on fab")
         context?.let {
-//            val dialog = AlertDialog
-//                    .Builder(it)
-//                    .setView(R.layout.add_list_dialog)
-//                    .create()
-//
-//            ok_btn.setOnClickListener{
-//                val newList = if (viewModel.allCategories?.value.isNullOrEmpty()) {
-//                    GlobalScope.launch {
-//                        viewModel.insert(CategoryEntity("new category"))
-//                    }
-//                    ListEntity(new_list_name.text.toString(),"new category")
-//                } else {
-//                    ListEntity(new_list_name.text.toString(), viewModel.allCategories!!.value!![0].categoryName)
-//                }
-//
-//                GlobalScope.launch {
-//                    viewModel.insert(newList)
-//                }
-//            }
-//
-//            dialog.show()
+            val dialog = AlertDialog
+                    .Builder(it)
+                    .setView(R.layout.add_list_dialog)
+                    .setPositiveButton("OK"){_ , _->
+                        val newList = if (viewModel.allCategories?.value.isNullOrEmpty()) {
+                            GlobalScope.launch {
+                                viewModel.insert(CategoryEntity("new category"))
+                            }
+                            ListEntity(new_list_name.text,"new category")
+                        } else {
+                            ListEntity(new_list_name.text.toString(), viewModel.allCategories!!.value!![0].categoryName)
+                        }
+
+                        GlobalScope.launch {
+                            viewModel.insert(newList)
+                        }
+                    }
+                    .create()
+
+            dialog.show()
         }
     }
 }
