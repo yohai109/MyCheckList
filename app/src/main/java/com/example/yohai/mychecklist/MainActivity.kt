@@ -17,9 +17,9 @@ class MainActivity : AppCompatActivity() {
     lateinit var viewModel: CurrListViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        AndroidInjection.inject(this)
 
         viewModel = ViewModelProviders.of(this, factory).get(CurrListViewModel::class.java)
 

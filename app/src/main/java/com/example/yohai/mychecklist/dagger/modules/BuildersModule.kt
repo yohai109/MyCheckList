@@ -1,4 +1,4 @@
-package com.example.yohai.mychecklist.dagger
+package com.example.yohai.mychecklist.dagger.modules
 
 import com.example.yohai.mychecklist.MainActivity
 import dagger.Module
@@ -8,5 +8,5 @@ import dagger.android.ContributesAndroidInjector
 abstract class BuildersModule {
 
     @ContributesAndroidInjector
-    abstract fun contributeMainActivity(): MainActivity
+    abstract fun contributeActivityInjector(): MainActivity
 }

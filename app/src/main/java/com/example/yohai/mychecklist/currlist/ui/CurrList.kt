@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.example.yohai.mychecklist.R
 import com.example.yohai.mychecklist.currlist.viewmodel.CurrListViewModel
 import com.example.yohai.mychecklist.database.entities.CategoryEntity
+import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.curr_list_fragment.*
 import timber.log.Timber
 
@@ -22,7 +23,6 @@ class CurrList : Fragment() {
         fun newInstance() = CurrList()
     }
 
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.curr_list_fragment, container, false)
@@ -31,6 +31,7 @@ class CurrList : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         activity?.let {
+            AndroidInjection.inject(it)
             viewModel = ViewModelProviders.of(it).get(CurrListViewModel::class.java)
         }
 

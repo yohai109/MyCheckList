@@ -1,4 +1,4 @@
-package com.example.yohai.mychecklist.dagger
+package com.example.yohai.mychecklist.dagger.modules
 
 import android.app.Application
 import androidx.room.Room
