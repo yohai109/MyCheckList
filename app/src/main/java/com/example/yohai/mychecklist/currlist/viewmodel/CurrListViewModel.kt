@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import com.example.yohai.mychecklist.database.Repository
 import com.example.yohai.mychecklist.database.entities.CategoryEntity
 
-class CurrListViewModel : ViewModel() {
+class CurrListViewModel(repo: Repository) : ViewModel() {
     // TODO: Implement the ViewModel
     private var repo: Repository? = null
     var allCategories: LiveData<List<CategoryEntity>>? = null

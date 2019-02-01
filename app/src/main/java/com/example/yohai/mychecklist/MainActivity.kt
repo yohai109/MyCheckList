@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.example.yohai.mychecklist.currlist.ui.CurrList
 import com.example.yohai.mychecklist.currlist.viewmodel.CurrListViewModel
+import dagger.android.AndroidInjection
 import timber.log.Timber
 
 class MainActivity : AppCompatActivity() {
@@ -15,6 +16,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        AndroidInjection.inject(this)
+
         viewModel = ViewModelProviders.of(this).get(CurrListViewModel::class.java)
 //        viewModel.initRepo(application)
 

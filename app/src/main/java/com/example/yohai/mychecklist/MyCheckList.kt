@@ -1,12 +1,23 @@
 package com.example.yohai.mychecklist
 
+import android.app.Activity
 import android.app.Application
+import com.example.yohai.mychecklist.dagger.AppModule
+import com.example.yohai.mychecklist.dagger.component.DaggerAppComponent
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
+import dagger.android.AndroidInjector
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.HasActivityInjector
 import timber.log.Timber
+import javax.inject.Inject
 
 
-class MyCheckList: Application() {
+class MyCheckList: Application(), HasActivityInjector {
+
+    @Inject
+    lateinit var activityInjector: DispatchingAndroidInjector<Activity>
+
     override fun onCreate() {
         super.onCreate()
 
@@ -19,7 +30,11 @@ class MyCheckList: Application() {
 //            Timber.plant(Timber.DebugTree())
             Timber.plant(MyLogTree())
         }
+
+        DaggerAppComponent.builder().appModule(AppModule(this)).build().inject(this)
     }
+
+    override fun activityInjector(): AndroidInjector<Activity> = activityInjector
 
     inner class MyLogTree: Timber.DebugTree() {
         override fun log(priority: Int, tag: String?, message: String, t: Throwable?) {
