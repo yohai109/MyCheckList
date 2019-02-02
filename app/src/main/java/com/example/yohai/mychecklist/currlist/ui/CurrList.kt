@@ -13,6 +13,7 @@ import com.example.yohai.mychecklist.R
 import com.example.yohai.mychecklist.currlist.viewmodel.CurrListViewModel
 import com.example.yohai.mychecklist.database.entities.CategoryEntity
 import com.example.yohai.mychecklist.database.entities.ListEntity
+import com.example.yohai.mychecklist.newlistdialog.NewListDialog
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.add_list_dialog.*
 import kotlinx.android.synthetic.main.curr_list_fragment.*
@@ -23,9 +24,19 @@ import timber.log.Timber
 class CurrList : Fragment() {
 
     lateinit var viewModel: CurrListViewModel
+    private lateinit var category: String
+
 
     companion object {
-        fun newInstance() = CurrList()
+        fun newInstance(category: String): NewListDialog {
+            return NewListDialog().apply {
+                arguments = Bundle(1).apply {
+                    putString(CATEGORY_ARGUMENT, category)
+                }
+            }
+        }
+
+        private const val CATEGORY_ARGUMENT = "categoryName"
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -40,7 +51,11 @@ class CurrList : Fragment() {
             viewModel = ViewModelProviders.of(it).get(CurrListViewModel::class.java)
         }
 
-        fab.setOnClickListener { fabClick(it) }
+        arguments?.let {
+            category = it.getString(CurrList.CATEGORY_ARGUMENT,"")
+        }
+
+        fab.setOnClickListener { fabClick() }
 
         viewModel.allCategories?.observe(this, Observer<List<CategoryEntity>> {
             Timber.d("Categories has changed")
@@ -49,29 +64,8 @@ class CurrList : Fragment() {
         })
     }
 
-    private fun fabClick(v: View?) {
+    private fun fabClick() {
         Timber.d("Clicked on fab")
-        context?.let {
-            val dialog = AlertDialog
-                    .Builder(it)
-                    .setView(R.layout.add_list_dialog)
-                    .setPositiveButton("OK"){_ , _->
-                        val newList = if (viewModel.allCategories?.value.isNullOrEmpty()) {
-                            GlobalScope.launch {
-                                viewModel.insert(CategoryEntity("new category"))
-                            }
-                            ListEntity(new_list_name.text,"new category")
-                        } else {
-                            ListEntity(new_list_name.text.toString(), viewModel.allCategories!!.value!![0].categoryName)
-                        }
-
-                        GlobalScope.launch {
-                            viewModel.insert(newList)
-                        }
-                    }
-                    .create()
-
-            dialog.show()
-        }
+        context?.let { NewListDialog.newInstance(category).dialog.show() }
     }
 }
