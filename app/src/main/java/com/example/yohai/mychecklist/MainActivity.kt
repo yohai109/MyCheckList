@@ -24,7 +24,9 @@ class MainActivity : AppCompatActivity() {
         viewModel = ViewModelProviders.of(this, factory).get(CurrListViewModel::class.java)
 
         Timber.d("Adding first Fragment")
-        addFragment("firstFragment",R.id.fragment_holder){ CurrList.newInstance()}
+        viewModel.allCategories?.value?.firstOrNull()?.let {
+            addFragment("firstFragment",R.id.fragment_holder){ CurrList.newInstance(it.categoryName)}
+        }
     }
 }
 

@@ -15,5 +15,5 @@ import androidx.room.PrimaryKey
         )])
 data class ListEntity(
         @PrimaryKey @ColumnInfo(name = "list_name") val listName: String,
-        @ColumnInfo(name = "category_name") val categoryName: String
+        @PrimaryKey @ColumnInfo(name = "category_name") val categoryName: String
 )

@@ -24,9 +24,19 @@ import timber.log.Timber
 class CurrList : Fragment() {
 
     lateinit var viewModel: CurrListViewModel
+    private lateinit var category: String
+
 
     companion object {
-        fun newInstance() = CurrList()
+        fun newInstance(category: String): NewListDialog {
+            return NewListDialog().apply {
+                arguments = Bundle(1).apply {
+                    putString(CATEGORY_ARGUMENT, category)
+                }
+            }
+        }
+
+        private const val CATEGORY_ARGUMENT = "categoryName"
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -41,6 +51,10 @@ class CurrList : Fragment() {
             viewModel = ViewModelProviders.of(it).get(CurrListViewModel::class.java)
         }
 
+        arguments?.let {
+            category = it.getString(CurrList.CATEGORY_ARGUMENT,"")
+        }
+
         fab.setOnClickListener { fabClick() }
 
         viewModel.allCategories?.observe(this, Observer<List<CategoryEntity>> {
@@ -52,6 +66,6 @@ class CurrList : Fragment() {
 
     private fun fabClick() {
         Timber.d("Clicked on fab")
-        context?.let { NewListDialog().dialog.show() }
+        context?.let { NewListDialog.newInstance(category).dialog.show() }
     }
 }

@@ -11,8 +11,14 @@ import androidx.room.PrimaryKey
                 childColumns = ["list_name"],
                 parentColumns = ["list_name"],
                 onDelete = ForeignKey.CASCADE
+        ), ForeignKey(
+                entity = ListEntity::class,
+                childColumns = ["category_name"],
+                parentColumns = ["category_name"],
+                onDelete = ForeignKey.CASCADE
         )])
 data class ItemEntity(
         @PrimaryKey @ColumnInfo(name = "item_name") val itemName: String,
-        @ColumnInfo(name = "list_name") val listName: String
+        @PrimaryKey @ColumnInfo(name = "list_name") val listName: String,
+        @PrimaryKey @ColumnInfo(name = "category_name") val categoryName: String
 )
